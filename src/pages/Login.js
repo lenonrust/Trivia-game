@@ -1,0 +1,92 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import logo from '../trivia.png';
+import { submitPlayer } from '../actions';
+
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gravatarEmail: '',
+      isDisabled: true,
+      name: '',
+    };
+  }
+
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value }, () => {
+      this.setState({
+        isDisabled: true,
+      });
+      const { name, gravatarEmail } = this.state;
+      const MIN_PASS_LENGH = 3;
+      const EMAIL_VAL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (name.length >= MIN_PASS_LENGH && gravatarEmail.match(EMAIL_VAL)) {
+        this.setState({
+          isDisabled: false,
+        });
+      }
+    });
+  };
+
+  handleSubmit = () => {
+    const { submitPlayerAction } = this.props;
+    submitPlayerAction(this.state);
+  }
+
+  render() {
+    const { name, gravatarEmail, isDisabled } = this.state;
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={ logo } className="App-logo" alt="logo" />
+          <form>
+            <label htmlFor="name-input">
+              Name:
+              <input
+                type="text"
+                id="name-input"
+                name="name"
+                value={ name }
+                data-testid="input-player-name"
+                onChange={ this.handleChange }
+              />
+            </label>
+            <br />
+            <label htmlFor="email">
+              E-mail:
+              <input
+                type="text"
+                id="email"
+                value={ gravatarEmail }
+                name="gravatarEmail"
+                data-testid="input-gravatar-email"
+                onChange={ this.handleChange }
+              />
+            </label>
+            <br />
+            <button
+              type="button"
+              disabled={ isDisabled }
+              onClick={ this.handleSubmit }
+              data-testid="btn-play"
+            >
+              Play
+            </button>
+          </form>
+        </header>
+      </div>
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  submitPlayerAction: (info) => dispatch(submitPlayer(info)),
+});
+
+Login.propTypes = {
+  submitPlayerAction: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);
