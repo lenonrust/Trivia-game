@@ -1,4 +1,4 @@
-// import { NEW_ACTION } from './actions'; // importa action type
+import { SUBMIT_PLAYER } from '../actions'; // importa action type
 
 const INITIAL_STATE = {
   name: '',
@@ -9,6 +9,12 @@ const INITIAL_STATE = {
 
 function playerReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+  case SUBMIT_PLAYER:
+    return {
+      ...state,
+      name: action.payload.name,
+      gravatarEmail: action.payload.gravatarEmail,
+    };
   default:
     return state;
   }
