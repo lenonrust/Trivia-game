@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../trivia.png';
-import { getToken } from '../actions';
+import { getToken, submitPlayer } from '../actions';
 
 class Login extends Component {
   constructor(props) {
@@ -31,7 +31,8 @@ class Login extends Component {
   };
 
   handleSubmit = () => {
-    const { requestToken, history } = this.props;
+    const { requestToken, history, user } = this.props;
+    user(this.state);
     requestToken();
     history.push('/game');
   }
@@ -95,11 +96,13 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  user: (state) => dispatch(submitPlayer(state)),
   requestToken: () => dispatch(getToken()),
 });
 
 Login.propTypes = {
   requestToken: PropTypes.func.isRequired,
+  user: PropTypes.func.isRequired,
   history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
