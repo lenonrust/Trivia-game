@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
+import '../index.css';
 
 class Game extends Component {
   constructor(props) {
@@ -12,6 +13,8 @@ class Game extends Component {
       questions: [],
       index: 0,
       isLoading: true,
+      correctAnswerClass: '',
+      wrongAnswerClass: '',
     };
   }
 
@@ -38,8 +41,15 @@ class Game extends Component {
     });
   }
 
+  handleClick = () => {
+    this.setState({
+      correctAnswerClass: 'Green',
+      wrongAnswerClass: 'Red',
+    });
+  }
+
   handleOptions = (question) => {
-    console.log('question', question);
+    const { correctAnswerClass, wrongAnswerClass } = this.state;
     const answers = [...question.incorrect_answers, question.correct_answer];
 
     // retirado de https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -51,10 +61,14 @@ class Game extends Component {
     return shuffle.map((btn, index) => (
       <button
         type="button"
+        className={ btn === question.correct_answer ? (correctAnswerClass
+        ) : (
+          wrongAnswerClass) }
         key={ btn }
         data-testid={ btn === question.correct_answer ? ('correct-answer'
         ) : (
           `wrong-answer-${index}`) }
+        onClick={ () => this.handleClick() }
       >
         {btn}
       </button>));
