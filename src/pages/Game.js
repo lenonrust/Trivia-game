@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
+import Timer from '../components/Timer';
 import '../index.css';
 
 class Game extends Component {
@@ -15,6 +16,7 @@ class Game extends Component {
       isLoading: true,
       correctAnswerClass: '',
       wrongAnswerClass: '',
+      isDisableOption: false,
     };
   }
 
@@ -49,15 +51,13 @@ class Game extends Component {
   }
 
   handleOptions = (question) => {
-    const { correctAnswerClass, wrongAnswerClass } = this.state;
+    const { correctAnswerClass, wrongAnswerClass, isDisableOption } = this.state;
     const answers = [...question.incorrect_answers, question.correct_answer];
-
     // retirado de https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
     // [1,2,3,4,5,6].sort( () => .5 - Math.random() );
 
     const NUMBER = 0.5;
     const shuffle = answers.sort(() => Math.random() - NUMBER);
-    console.log('shuffle', shuffle);
     return shuffle.map((btn, index) => (
       <button
         type="button"
@@ -69,14 +69,17 @@ class Game extends Component {
         ) : (
           `wrong-answer-${index}`) }
         onClick={ () => this.handleClick() }
+        disabled={ isDisableOption }
       >
         {btn}
       </button>));
   }
 
-  // handleAnswer = () => {
-  // console.log('teste');
-  // }
+  disableTimerToButton = () => {
+    this.setState({
+      isDisableOption: true,
+    });
+  }
 
   render() {
     const { questions, isLoading, index } = this.state;
@@ -86,6 +89,9 @@ class Game extends Component {
         {isLoading ? (<Loading />)
           : (
             <section className="question-section">
+              <Timer
+                disable={ () => this.disableTimerToButton() }
+              />
               <div>
                 <h1 className="question">{`${index} / ${questions.length}`}</h1>
                 <span
