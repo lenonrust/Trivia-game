@@ -30,10 +30,10 @@ class Login extends Component {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const { requestToken, history, user } = this.props;
     user(this.state);
-    requestToken();
+    await requestToken();
     history.push('/game');
   }
 

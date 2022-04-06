@@ -16,11 +16,3 @@ export const getToken = () => async (dispatch) => {
   const data = await response.json();
   dispatch(requestToken(data.token));
 };
-
-// function requestCurrencies() {
-//   return { type: REQUEST_CURRENCIES };
-// }
-
-// function failedRequest(error) {
-//   return { type: FAILED_REQUEST, payload: error };
-// }
