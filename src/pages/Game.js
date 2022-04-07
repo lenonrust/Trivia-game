@@ -7,6 +7,7 @@ import Timer from '../components/Timer';
 import '../index.css';
 
 const visibility = 'not-visible';
+const btnAnswers = 'btn-answers';
 
 class Game extends Component {
   constructor(props) {
@@ -16,8 +17,8 @@ class Game extends Component {
       questions: [],
       index: 0,
       isLoading: true,
-      correctAnswerClass: '',
-      wrongAnswerClass: '',
+      correctAnswerClass: btnAnswers,
+      wrongAnswerClass: btnAnswers,
       isDisableOption: false,
       btnNextVisible: visibility,
     };
@@ -48,8 +49,8 @@ class Game extends Component {
 
   handleClick = () => {
     this.setState({
-      correctAnswerClass: 'Green',
-      wrongAnswerClass: 'Red',
+      correctAnswerClass: 'Green btn-answers',
+      wrongAnswerClass: 'Red btn-answers',
       btnNextVisible: 'visible',
     });
   }
@@ -91,10 +92,14 @@ class Game extends Component {
       this.setState((prevState) => ({
         index: prevState.index + 1,
         btnNextVisible: visibility,
+        correctAnswerClass: btnAnswers,
+        wrongAnswerClass: btnAnswers,
       }));
     } else {
       this.setState({
         btnNextVisible: visibility,
+        correctAnswerClass: btnAnswers,
+        wrongAnswerClass: btnAnswers,
       });
     }
   }
