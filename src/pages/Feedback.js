@@ -19,6 +19,16 @@ class Feedback extends Component {
     return 'Could be better...';
   };
 
+  playAgainBtn = () => {
+    const { history } = this.props;
+    history.push('/');
+  }
+
+  goToRanking = () => {
+    const { history } = this.props;
+    history.push('/Ranking');
+  }
+
   render() {
     const { assertions, score } = this.props;
     return (
@@ -31,6 +41,20 @@ class Feedback extends Component {
           <p data-testid="feedback-total-score">{score}</p>
           <p>Número de questões corretas:</p>
           <p data-testid="feedback-total-question">{assertions}</p>
+          <button
+            type="button"
+            data-testid="btn-play-again"
+            onClick={ this.playAgainBtn }
+          >
+            Play Again
+          </button>
+          <button
+            type="button"
+            data-testid="btn-ranking"
+            onClick={ this.goToRanking }
+          >
+            Ranking
+          </button>
         </main>
       </>
     );
@@ -38,9 +62,9 @@ class Feedback extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  assertions: state.playerReducer.assertions,
-  score: state.playerReducer.score,
-  name: state.playerReducer.name,
+  assertions: state.player.assertions,
+  score: state.player.score,
+  name: state.player.name,
 });
 
 Feedback.propTypes = {

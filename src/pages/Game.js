@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { updateScore } from '../actions';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Timer from '../components/Timer';
@@ -21,6 +22,8 @@ class Game extends Component {
       wrongAnswerClass: btnAnswers,
       isDisableOption: false,
       btnNextVisible: visibility,
+      points: 0,
+      timerOn: true,
     };
   }
 
@@ -47,11 +50,41 @@ class Game extends Component {
     });
   }
 
-  handleClick = () => {
+  handleClick = (info, { target }) => {
+    const { updateScoreAndAssertion } = this.props;
+    //  dataset. retirado de https://gist.github.com/sibelius/bf49eeb2eada00d63b533866cc510556
+    if (target.dataset.testid === 'correct-answer') {
+      const hard = 3;
+      const convertDifficulty = () => {
+        switch (info.difficulty) {
+        case 'hard':
+          return hard;
+        case 'medium':
+          return 2;
+        case 'easy':
+          return 1;
+        default:
+          break;
+        }
+      };
+      const base = 10;
+      this.setState({
+        correctAnswerClass: 'Green btn-answers',
+        wrongAnswerClass: 'Red btn-answers',
+        btnNextVisible: 'visible',
+        isDisableOption: true,
+        points: base + (this.recoverTimeLeft() * convertDifficulty()),
+      }, () => {
+        const { points } = this.state;
+        const exportPoints = { points, assertions: 1 };
+        updateScoreAndAssertion(exportPoints);
+      });
+    }
     this.setState({
       correctAnswerClass: 'Green btn-answers',
       wrongAnswerClass: 'Red btn-answers',
       btnNextVisible: 'visible',
+      isDisableOption: true,
     });
   }
 
@@ -73,7 +106,7 @@ class Game extends Component {
         data-testid={ btn === question.correct_answer ? ('correct-answer'
         ) : (
           `wrong-answer-${index}`) }
-        onClick={ () => this.handleClick() }
+        onClick={ (e) => this.handleClick(question, e) }
         disabled={ isDisableOption }
       >
         {btn}
@@ -87,6 +120,9 @@ class Game extends Component {
   }
 
   nextQuestion = () => {
+    this.setState({
+      timerOn: false,
+    });
     const { index, questions } = this.state;
     if (index < (questions.length - 1)) {
       this.setState((prevState) => ({
@@ -94,18 +130,37 @@ class Game extends Component {
         btnNextVisible: visibility,
         correctAnswerClass: btnAnswers,
         wrongAnswerClass: btnAnswers,
-      }));
+        isDisableOption: false,
+      }), () => {
+        this.setState({
+          timerOn: true,
+          wrongAnswerClass: btnAnswers,
+        });
+      });
     } else {
       this.setState({
         btnNextVisible: visibility,
         correctAnswerClass: btnAnswers,
         wrongAnswerClass: btnAnswers,
+        isDisableOption: false,
+      }, () => {
+        this.setState({
+          timerOn: true,
+        });
       });
+      const { history } = this.props;
+      history.push('/feedback');
     }
   }
 
+  recoverTimeLeft = () => {
+    const timer = Number(document.getElementById('clock').innerHTML);
+    return timer;
+  }
+
   render() {
-    const { questions, isLoading, index, btnNextVisible } = this.state;
+    const { questions, isLoading, index,
+      btnNextVisible, points, timerOn } = this.state;
     return (
       <div>
         <Header />
@@ -113,9 +168,6 @@ class Game extends Component {
           : (
             <>
               <section className="question-section">
-                <Timer
-                  disable={ () => this.disableTimerToButton() }
-                />
                 <div>
                   <h1 className="question">{`${index + 1} / ${questions.length}`}</h1>
                   <span
@@ -143,6 +195,10 @@ class Game extends Component {
               >
                 Next
               </button>
+              {timerOn && <Timer
+                disable={ () => this.disableTimerToButton() }
+              />}
+              <h1>{points}</h1>
             </>
           )}
       </div>
@@ -154,8 +210,14 @@ const mapStateToProps = (state) => ({
   apiToken: state.token,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  updateScoreAndAssertion: (payload) => dispatch(updateScore(payload)),
+});
+
 Game.propTypes = {
   apiToken: PropTypes.string.isRequired,
+  updateScoreAndAssertion: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default connect(mapStateToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

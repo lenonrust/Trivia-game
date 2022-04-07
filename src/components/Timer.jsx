@@ -13,6 +13,10 @@ class Timer extends Component {
     this.timer();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.countdown);
+  }
+
   timer = () => {
     const { disable } = this.props;
     const SECONDS = 1000;
@@ -32,7 +36,7 @@ class Timer extends Component {
   render() {
     const { initialTime } = this.state;
     return (
-      <span>{initialTime}</span>
+      <span id="clock">{initialTime}</span>
     );
   }
 }
