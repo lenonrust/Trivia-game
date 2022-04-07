@@ -6,6 +6,8 @@ import Loading from '../components/Loading';
 import Timer from '../components/Timer';
 import '../index.css';
 
+const visibility = 'not-visible';
+
 class Game extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +19,7 @@ class Game extends Component {
       correctAnswerClass: '',
       wrongAnswerClass: '',
       isDisableOption: false,
+      btnNextVisible: visibility,
     };
   }
 
@@ -47,6 +50,7 @@ class Game extends Component {
     this.setState({
       correctAnswerClass: 'Green',
       wrongAnswerClass: 'Red',
+      btnNextVisible: 'visible',
     });
   }
 
@@ -81,36 +85,60 @@ class Game extends Component {
     });
   }
 
+  nextQuestion = () => {
+    const { index, questions } = this.state;
+    if (index < (questions.length - 1)) {
+      this.setState((prevState) => ({
+        index: prevState.index + 1,
+        btnNextVisible: visibility,
+      }));
+    } else {
+      this.setState({
+        btnNextVisible: visibility,
+      });
+    }
+  }
+
   render() {
-    const { questions, isLoading, index } = this.state;
+    const { questions, isLoading, index, btnNextVisible } = this.state;
     return (
       <div>
         <Header />
         {isLoading ? (<Loading />)
           : (
-            <section className="question-section">
-              <Timer
-                disable={ () => this.disableTimerToButton() }
-              />
-              <div>
-                <h1 className="question">{`${index} / ${questions.length}`}</h1>
-                <span
-                  className="question-catergy"
-                  data-testid="question-category"
-                >
-                  {questions[index].category}
-                </span>
-                <p
-                  className="question-text"
-                  data-testid="question-text"
-                >
-                  {questions[index].question}
-                </p>
-                <div data-testid="answer-options">
-                  {this.handleOptions(questions[index])}
+            <>
+              <section className="question-section">
+                <Timer
+                  disable={ () => this.disableTimerToButton() }
+                />
+                <div>
+                  <h1 className="question">{`${index + 1} / ${questions.length}`}</h1>
+                  <span
+                    className="question-catergy"
+                    data-testid="question-category"
+                  >
+                    {questions[index].category}
+                  </span>
+                  <p
+                    className="question-text"
+                    data-testid="question-text"
+                  >
+                    {questions[index].question}
+                  </p>
+                  <div data-testid="answer-options">
+                    {this.handleOptions(questions[index])}
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
+              <button
+                type="button"
+                className={ btnNextVisible }
+                onClick={ () => this.nextQuestion() }
+                data-testid="btn-next"
+              >
+                Next
+              </button>
+            </>
           )}
       </div>
     );
