@@ -18,7 +18,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.playerReducer,
+  user: state.player,
 });
 
 Header.propTypes = {

@@ -1,5 +1,6 @@
 export const SUBMIT_PLAYER = 'SUBMIT_PLAYER';
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
+export const UPDATE_SCORE = 'UPDATE_SCORE';
 
 export const submitPlayer = (payload) => ({
   type: SUBMIT_PLAYER,
@@ -16,3 +17,8 @@ export const getToken = () => async (dispatch) => {
   const data = await response.json();
   dispatch(requestToken(data.token));
 };
+
+export const updateScore = (payload) => ({
+  type: UPDATE_SCORE,
+  payload,
+});
