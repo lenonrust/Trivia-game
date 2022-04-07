@@ -1,10 +1,10 @@
 import { SUBMIT_PLAYER } from '../actions'; // importa action type
 
 const INITIAL_STATE = {
-  name: 'Tulio Maravilha',
-  assertions: 2,
-  score: 120,
-  gravatarEmail: 'jorge@jorjao.com',
+  name: '',
+  assertions: 0,
+  score: 0,
+  gravatarEmail: '',
 };
 
 function playerReducer(state = INITIAL_STATE, action) {
