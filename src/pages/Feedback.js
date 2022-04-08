@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import md5 from 'crypto-js/md5';
 import { resetPlayer } from '../actions';
 import Header from '../components/Header';
 
 class Feedback extends Component {
   componentDidMount() {
-    const { name, score } = this.props;
-    localStorage.setItem('ranking',
-      JSON.stringify([{ name, score, picture: 'picture01' }]));
+    const { name, score, gravatarEmail } = this.props;
+    const email = md5(gravatarEmail).toString();
+    const dataFromStorage = JSON.parse(localStorage.getItem('ranking'));
+    if (dataFromStorage) {
+      localStorage.setItem('ranking',
+        JSON.stringify([...dataFromStorage, { name, score, picture: `https://www.gravatar.com/avatar/${email}` }]));
+    } else {
+      localStorage.setItem('ranking',
+        JSON.stringify([{ name, score, picture: `https://www.gravatar.com/avatar/${email}` }]));
+    }
   }
 
   feedbackMessage = () => {
@@ -38,7 +46,7 @@ class Feedback extends Component {
         <Header />
         <main>
           <h1>Feedback</h1>
-          <h2 data-testid="feedback-text">{ this.feedbackMessage() }</h2>
+          <h2 data-testid="feedback-text">{this.feedbackMessage()}</h2>
           <p>O seu placar total foi de:</p>
           <p data-testid="feedback-total-score">{score}</p>
           <p>Número de questões corretas:</p>
@@ -67,6 +75,7 @@ const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
   score: state.player.score,
   name: state.player.name,
+  gravatarEmail: state.player.gravatarEmail,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -76,6 +85,7 @@ Feedback.propTypes = {
   assertions: PropTypes.number,
   score: PropTypes.number,
   name: PropTypes.string,
+  gravatarEmail: PropTypes.string,
   restartGame: PropTypes.func,
 }.isRequired;
 
