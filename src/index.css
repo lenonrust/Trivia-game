@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 code {
@@ -12,12 +13,14 @@ code {
     monospace;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
 .Green {
-  border: 3px solid rgb(6, 240, 15);
+  border: 3px solid rgb(6, 240, 15)!important;
 }
 
 .Red {
-  border: 3px solid  rgb(255, 0, 0);
+  border: 3px solid  rgb(255, 0, 0)!important;
 }
 
 .not-visible {
@@ -26,4 +29,92 @@ code {
 
 .visible {
   border: solid 3px blue
+}
+.game-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  background-image: linear-gradient(to left,#b04afa, #4029cf 50%);
+  align-items: center;
+}
+
+.game-header {
+  width: 100%;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px 10px 10px;
+  height: 130px;
+  font-size: x-large;
+  font-family: 'Alfa Slab One' , cursive;
+  background-color: #282c34;
+  color: rgb(217, 176, 255);
+}
+
+.img-container img {
+  box-sizing: border-box;
+  border-radius: 100%;
+  width: 85px;
+  height: 85px;
+  max-width: 90px;
+  max-height: 90px;
+  align-self: center;
+}
+
+.img-container {
+  border: 0;
+  border-radius: 100%;
+  background-image: linear-gradient(to left,#AF40FF, #5B42F3 50%);
+  display: flex;
+  justify-content: center;  
+  width: 95px;
+  height: 95px;
+
+}
+
+.question-section {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
+  margin-top: -70px;
+}
+
+.card-img {
+  width: 80%;
+  height: 800px;
+  max-width: 1000px;
+  max-height: 850px;
+  display: flex;
+  align-self: center;
+  justify-content: flex-start;
+
+} 
+
+.clock {
+  display: flex;
+  top:170px;
+  font-size: 50px;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  color: rgb(217, 176, 255);
+  text-shadow: 0 0 3px black; ;
+}
+
+.card-container {
+  position: absolute;
+  top: 380px;
+  max-width: 600px;
+  align-self: center;
+}
+.border-clock {
+  position: absolute;
+  width: 90px;
+  top: 161px;
 }

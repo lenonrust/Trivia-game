@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import logo from '../trivia.png';
+import logo from '../trivia_night.png';
 import { getToken, submitPlayer } from '../actions';
+import '../Styles/Login.css';
 
 class Login extends Component {
   constructor(props) {
@@ -48,9 +49,9 @@ class Login extends Component {
       <div className="App">
         <header className="App-header">
           <img src={ logo } className="App-logo" alt="logo" />
-          <form>
-            <label htmlFor="name-input">
-              Name:
+          <form className="form-login">
+            <label className="name-label" htmlFor="name-input">
+              <span className="login-text">Name</span>
               <input
                 type="text"
                 id="name-input"
@@ -61,8 +62,8 @@ class Login extends Component {
               />
             </label>
             <br />
-            <label htmlFor="email">
-              E-mail:
+            <label className="email-label" htmlFor="email">
+              <span className="login-text">E-mail</span>
               <input
                 type="text"
                 id="email"
@@ -72,22 +73,25 @@ class Login extends Component {
                 onChange={ this.handleChange }
               />
             </label>
-            <br />
-            <button
-              type="button"
-              disabled={ isDisabled }
-              onClick={ this.handleSubmit }
-              data-testid="btn-play"
-            >
-              Play
-            </button>
-            <button
-              type="button"
-              data-testid="btn-settings"
-              onClick={ this.handleConfigsBtn }
-            >
-              Settings
-            </button>
+            <div className="button-container">
+              <button
+                className="btn-login"
+                type="button"
+                disabled={ isDisabled }
+                onClick={ this.handleSubmit }
+                data-testid="btn-play"
+              >
+                Play
+              </button>
+              <button
+                className="btn-login"
+                type="button"
+                data-testid="btn-settings"
+                onClick={ this.handleConfigsBtn }
+              >
+                Settings
+              </button>
+            </div>
           </form>
         </header>
       </div>

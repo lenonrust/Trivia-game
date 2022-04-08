@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import borderClock from '../borderClock.png';
 
 class Timer extends Component {
   constructor(props) {
@@ -36,7 +37,10 @@ class Timer extends Component {
   render() {
     const { initialTime } = this.state;
     return (
-      <span id="clock">{initialTime}</span>
+      <>
+        <img className="border-clock" src={ borderClock } alt="clock-border" />
+        <span className="clock" id="clock">{initialTime}</span>
+      </>
     );
   }
 }

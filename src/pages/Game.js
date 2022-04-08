@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Timer from '../components/Timer';
 import '../index.css';
+import cardImg from '../border_card.png';
 
 const visibility = 'not-visible';
 const btnAnswers = 'btn-answers';
@@ -161,16 +162,21 @@ class Game extends Component {
 
   render() {
     const { questions, isLoading, index,
-      btnNextVisible, points, timerOn } = this.state;
+      btnNextVisible, timerOn } = this.state;
     return (
-      <div>
+      <div className="game-container">
         <Header />
         {isLoading ? (<Loading />)
           : (
             <>
+              <img src={ cardImg } className="card-img" alt="card-logo" />
               <section className="question-section">
-                <div>
-                  <h1 className="question">{`${index + 1} / ${questions.length}`}</h1>
+                <div className="card-container">
+                  <h1
+                    className="question"
+                  >
+                    {`Question ${index + 1} / ${questions.length}`}
+                  </h1>
                   <span
                     className="question-catergy"
                     data-testid="question-category"
@@ -199,7 +205,6 @@ class Game extends Component {
               {timerOn && <Timer
                 disable={ () => this.disableTimerToButton() }
               />}
-              <h1>{points}</h1>
             </>
           )}
       </div>
