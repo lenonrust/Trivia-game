@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { resetPlayer } from '../actions';
 import Header from '../components/Header';
 
 class Feedback extends Component {
@@ -20,13 +21,14 @@ class Feedback extends Component {
   };
 
   playAgainBtn = () => {
-    const { history } = this.props;
+    const { history, restartGame } = this.props;
     history.push('/');
+    restartGame();
   }
 
   goToRanking = () => {
     const { history } = this.props;
-    history.push('/Ranking');
+    history.push('/ranking');
   }
 
   render() {
@@ -67,10 +69,14 @@ const mapStateToProps = (state) => ({
   name: state.player.name,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  restartGame: () => dispatch(resetPlayer()),
+});
 Feedback.propTypes = {
   assertions: PropTypes.number,
   score: PropTypes.number,
   name: PropTypes.string,
+  restartGame: PropTypes.func,
 }.isRequired;
 
-export default connect(mapStateToProps)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

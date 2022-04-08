@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import he from 'he';
 import { connect } from 'react-redux';
 import { updateScore } from '../actions';
 import Header from '../components/Header';
@@ -180,7 +181,7 @@ class Game extends Component {
                     className="question-text"
                     data-testid="question-text"
                   >
-                    {questions[index].question}
+                    {he.decode(questions[index].question)}
                   </p>
                   <div data-testid="answer-options">
                     {this.handleOptions(questions[index])}

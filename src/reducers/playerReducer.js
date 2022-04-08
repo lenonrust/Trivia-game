@@ -1,4 +1,4 @@
-import { SUBMIT_PLAYER, UPDATE_SCORE } from '../actions'; // importa action type
+import { SUBMIT_PLAYER, UPDATE_SCORE, NEW_PLAYER } from '../actions'; // importa action type
 
 const INITIAL_STATE = {
   name: '',
@@ -21,6 +21,8 @@ function playerReducer(state = INITIAL_STATE, action) {
       score: state.score + action.payload.points,
       assertions: state.assertions + action.payload.assertions,
     };
+  case NEW_PLAYER:
+    return INITIAL_STATE;
   default:
     return state;
   }
