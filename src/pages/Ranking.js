@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { resetPlayer } from '../actions';
+import '../Styles/ranking.css';
 
 class Ranking extends Component {
   constructor(props) {
@@ -27,21 +28,29 @@ class Ranking extends Component {
     const { rankingList } = this.state;
     return (
       <div>
-        <h1 data-testid="ranking-title">Ranking</h1>
-        {rankingList.map((element, index) => (
-          <div key={ index }>
-            <img alt="player" src={ element.picture } />
-            <span data-testid={ `player-name-${index}` }>{element.name}</span>
-            <span data-testid={ `player-score-${index}` }>{element.score}</span>
-          </div>
-        ))}
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={ () => this.onClickLogin() }
-        >
-          Home
-        </button>
+        <div className="ranking-head">
+          <p data-testid="ranking-title">Ranking</p>
+          <span role="img" aria-labelledby="trophy">🏆</span>
+        </div>
+        <div className="ranking-container">
+          {rankingList.map((element, index) => (
+            <div className="ranking-card" key={ index }>
+              <img alt="player" src={ element.picture } />
+              <div className="ranking-player-info">
+                <span data-testid={ `player-name-${index}` }>{element.name}</span>
+                <span data-testid={ `player-score-${index}` }>{element.score}</span>
+              </div>
+            </div>
+          ))}
+          <button
+            className="ranking-go-home"
+            type="button"
+            data-testid="btn-go-home"
+            onClick={ () => this.onClickLogin() }
+          >
+            Home
+          </button>
+        </div>
       </div>
     );
   }

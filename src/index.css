@@ -6,6 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  background-image: url('https://wallpaper.dog/large/20393711.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 code {
@@ -16,27 +20,32 @@ code {
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 
 .Green {
-  border: 3px solid rgb(6, 240, 15)!important;
+  cursor: auto;
+  border: 0.15em solid rgb(6, 240, 15)!important;
+  color: white !important;
+  text-shadow: 0 0 0.5em rgb(6, 240, 15)!important; 
 }
 
+.Green:disabled{
+  cursor: auto;
+}
+
+
 .Red {
-  border: 3px solid  rgb(255, 0, 0)!important;
+  border: 0.15em solid rgb(255, 0, 0)!important;
+  color: #ccc !important;
+  text-shadow: 0 0 0.5em rgb(255, 0, 0)!important;
 }
 
 .not-visible {
   display: none;
 }
 
-.visible {
-  border: solid 3px blue
-}
 .game-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
   margin: 0;
-  background-image: linear-gradient(to left,#b04afa, #4029cf 50%);
   align-items: center;
 }
 
@@ -72,7 +81,6 @@ code {
   justify-content: center;  
   width: 95px;
   height: 95px;
-
 }
 
 .question-section {
@@ -91,30 +99,173 @@ code {
   display: flex;
   align-self: center;
   justify-content: flex-start;
-
 } 
 
 .clock {
+  margin-left: -48px;
   display: flex;
   top:170px;
   font-size: 50px;
   position: absolute;
   justify-content: center;
   align-items: center;
-  width: 80px;
+  width: 85px;
+  font-family:sans-serif;
   height: 80px;
   color: rgb(217, 176, 255);
-  text-shadow: 0 0 3px black; ;
+  text-shadow: 0 0 0.5em white!important; 
 }
 
-.card-container {
-  position: absolute;
-  top: 380px;
-  max-width: 600px;
-  align-self: center;
+.timeLeftOut {
+  color: rgb(145, 29, 29);
+  transition: 1.5s ease-out;
+  font-size: 52px;
 }
+
+.card-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  height: 140px;
+  left: -50px;
+  top: -55px;
+}
+.card-container h1{
+  color: rgb(217, 176, 255);
+  position: relative;
+  width: 120px;
+  height: 90px;
+  left: 5px;
+  text-align: center;
+  font-size: 27px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+.card-container span{
+  position: relative;
+  align-self: center;
+  top: -80px;
+  left: 10px;
+  font-size: xx-large;
+  color: rgb(217, 176, 255);
+}
+.card-container p {
+  color: white;
+  align-self: center;  
+  position: relative;
+  top: -60px;   
+  width: 70%;
+}
+
 .border-clock {
   position: absolute;
-  width: 90px;
-  top: 161px;
+  width: 95px;
+  top: 160px;
+  margin-left: -52px;
+}
+
+.answer-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.btn-answers {
+  cursor: pointer;
+  margin: 20px 15px 15px 15px ;
+  background-color: transparent;
+  border: 0.1rem solid white;
+  border-radius: .25em;
+  color: white;
+  font-size: 15px;
+  font-weight: 900;
+  width: 260px;
+  height: 55px;
+  outline: none;
+  transition: all 0.3s;
+  position: relative;
+  top: -0px;
+}
+
+ .visible {
+  margin-top: -220px;
+  position: absolute;
+  top: 980px;
+  width: 100px;
+  margin-left: -50px;
+  border: none;
+  font-family: sans-serif;
+  font-size: 17px;
+  background: linear-gradient(20deg, #000, #272727);
+  color: rgb(217, 176, 255);
+  border: solid 1px rgb(217, 176, 255);
+  padding: 10px;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+ }
+ 
+ .visible:before {
+  content: "»";
+  opacity: 0;
+  margin-left: -15px;
+  transition-duration: 0.2s;
+ }
+ 
+ .visible:hover:before {
+  margin-left: 0px;
+  opacity: 1;
+ }
+ 
+ .visible:hover {
+  color: rgb(217, 176, 255);
+  background: linear-gradient(20deg, #000, #272727);
+  border: solid 1px rgb(217, 176, 255);
+ }
+ .card-container {
+  font-family: 'Alfa Slab One' , cursive;
+  display: flex;
+  flex-direction: column;
+  padding: 3em 3em 1em ;
+  position: absolute;
+  top: 310px;
+  width: 698px;
+  height: 400px;
+  max-width: 900px;
+  align-self: center;
+  background: linear-gradient(0deg, #000, #272727);
+}
+
+.card-container :before, .card-container :after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0px;
+  background: linear-gradient(100deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
+    #0000ff, #00ff00,#ffff00, #ff0000);
+  background-size: 400%;
+  width: calc(100% + 5px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: steam 30s linear infinite;
+}
+
+@keyframes steam {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 2px;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.card-container :after {
+  filter: blur(15px);
 }

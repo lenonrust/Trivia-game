@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Timer from '../components/Timer';
 import '../index.css';
-import cardImg from '../border_card.png';
 
 const visibility = 'not-visible';
 const btnAnswers = 'btn-answers';
@@ -95,7 +94,6 @@ class Game extends Component {
     const answers = [...question.incorrect_answers, question.correct_answer];
     // retirado de https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
     // [1,2,3,4,5,6].sort( () => .5 - Math.random() );
-
     const NUMBER = 0.5;
     const shuffle = answers.sort(() => Math.random() - NUMBER);
     return shuffle.map((btn, index) => (
@@ -118,6 +116,7 @@ class Game extends Component {
   disableTimerToButton = () => {
     this.setState({
       isDisableOption: true,
+      btnNextVisible: 'visible',
     });
   }
 
@@ -168,28 +167,30 @@ class Game extends Component {
         <Header />
         {isLoading ? (<Loading />)
           : (
-            <>
-              <img src={ cardImg } className="card-img" alt="card-logo" />
+            <div className="game-section">
+              {/* <img src={ cardImg } className="card-img" alt="card-logo" /> */}
               <section className="question-section">
                 <div className="card-container">
-                  <h1
-                    className="question"
-                  >
-                    {`Question ${index + 1} / ${questions.length}`}
-                  </h1>
-                  <span
-                    className="question-catergy"
-                    data-testid="question-category"
-                  >
-                    {questions[index].category}
-                  </span>
-                  <p
-                    className="question-text"
-                    data-testid="question-text"
-                  >
-                    {he.decode(questions[index].question)}
-                  </p>
-                  <div data-testid="answer-options">
+                  <div className="card-header">
+                    <h1
+                      className="question"
+                    >
+                      {`${index + 1} / ${questions.length}`}
+                    </h1>
+                    <span
+                      className="question-catergy"
+                      data-testid="question-category"
+                    >
+                      {questions[index].category}
+                    </span>
+                    <p
+                      className="question-text"
+                      data-testid="question-text"
+                    >
+                      {he.decode(questions[index].question)}
+                    </p>
+                  </div>
+                  <div className="answer-container" data-testid="answer-options">
                     {this.handleOptions(questions[index])}
                   </div>
                 </div>
@@ -205,7 +206,7 @@ class Game extends Component {
               {timerOn && <Timer
                 disable={ () => this.disableTimerToButton() }
               />}
-            </>
+            </div>
           )}
       </div>
     );

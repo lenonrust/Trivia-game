@@ -7,6 +7,7 @@ class Timer extends Component {
     super(props);
     this.state = {
       initialTime: 30,
+      classClock: 'clock',
     };
   }
 
@@ -26,6 +27,12 @@ class Timer extends Component {
         initialTime: prevState.initialTime - 1,
       }), () => {
         const { initialTime } = this.state;
+        const leftTime = 10;
+        if (initialTime === leftTime) {
+          this.setState({
+            classClock: 'clock timeLeftOut',
+          });
+        }
         if (initialTime === 0) {
           clearInterval(this.countdown);
           disable();
@@ -35,11 +42,11 @@ class Timer extends Component {
   }
 
   render() {
-    const { initialTime } = this.state;
+    const { initialTime, classClock } = this.state;
     return (
       <>
         <img className="border-clock" src={ borderClock } alt="clock-border" />
-        <span className="clock" id="clock">{initialTime}</span>
+        <span className={ classClock } id="clock">{initialTime}</span>
       </>
     );
   }

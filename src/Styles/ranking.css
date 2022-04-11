@@ -1,0 +1,94 @@
+/* stylelint-disable at-rule-semicolon-space-before */
+* {
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+.ranking-head {
+  align-items: center;
+  color: rgb(217, 176, 255);
+  display: flex;
+  font-family: Alfa Slab One , cursive;
+  font-size: 3rem;
+  justify-content: center;
+}
+
+
+.ranking-head h1 {
+  margin: 2em;
+}
+
+.ranking-head span {
+  font-size: 50px;
+  margin-left: 20px;
+}
+
+.ranking-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.ranking-card {
+  border: 1px solid white;
+  border-radius: 1em;
+  box-shadow: 0 0 1em 0.25em white , 0 0 0.5em 0.15em #ccc , inset 0 0 0.5em 0.15em white;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px;
+  padding: 1em;
+  width: 450px;
+}
+
+.ranking-card img {
+  border-radius: 100%;
+}
+
+.ranking-player-info {
+  align-items: center;
+  color: rgb(217, 176, 255);
+  display: flex;
+  flex-direction: column;
+  font-family: Alfa Slab One , cursive;
+  justify-content: center;
+  left: -65px;
+  margin: 0 15px;
+  position: relative;
+  width: 200px;
+}
+
+.ranking-player-info span {
+  margin: 8px;
+}
+
+.ranking-go-home {
+  background: transparent;
+  border: solid 1px gainsboro;
+  border-radius: 4px;
+  box-shadow: 0 0 1em 0.25em white , 0 0 0.5em 0.15em #ccc , inset 0 0 0.5em 0.15em white;
+  color: rgb(217, 176, 255);
+  font-family: Alfa Slab One , cursive;
+  font-size: 18px;
+  margin-top: 20px;
+  padding: 0.5em 1.25em;
+  transition-duration: 0.2s;
+}
+
+.ranking-go-home:before {
+  content: '»';
+  margin-left: -15px;
+  opacity: 0;
+  transition-duration: 0.2s;
+}
+
+.ranking-go-home:hover:before {
+  margin-left: 0;
+  opacity: 1;
+}
+
+.ranking-go-home:hover {
+  background: rgba(0, 0, 0, 0.02);
+  border: solid 1px gainsboro;
+  color: rgb(217, 176, 255);
+}

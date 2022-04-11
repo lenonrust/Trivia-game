@@ -1,8 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+/* stylelint-disable max-line-length */
 
+/* stylelint-disable at-rule-semicolon-space-before */
 * {
   box-sizing: border-box;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 
 .form-login {
   display: flex;
@@ -22,7 +25,7 @@
 
 .login-text {
   color: rgb(217, 176, 255);
-  font-family: 'Alfa Slab One' , cursive;
+  font-family: Alfa Slab One , cursive;
   margin-left: 3px;
 }
 
@@ -38,7 +41,7 @@ input {
   background-color: var(--btn);
   border-radius: 10px;
   color: white;
-  font-family: 'Alfa Slab One' , cursive;
+  font-family: Alfa Slab One , cursive;
   font-size: medium;
   height: 30px;
   margin-top: 10px;
@@ -80,8 +83,19 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   width: 125px;
 }
 
+.btn-login:hover {
+  background-color: var(--base);
+  box-shadow: 0 0 1em 0.25em var(--base) , 0 0 4em 2em var(--second) , inset 0 0 0.75em 0.25em var(--base);
+  color: var(--btn);
+}
 
-.btn-login:disabled, button:disabled:hover {
+
+.btn-login:active {
+  box-shadow: 0 0 0.6em 0.25em var(--base) , 0 0 2.5em 2em var(--second) , inset 0 0 0.5em 0.25em var(--base);
+}
+
+
+.btn-login:disabled, .btn-login:disabled:hover {
   background-color: var(--btn);
   border: 0.25em solid var(--base) transparent;
   border-radius: 1em;
@@ -109,16 +123,4 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   top: 120%;
   transform: perspective(1.5em) rotateX(35deg) scale(1, 0.6);
   width: 100%;
-}
-
-
-.btn-login:hover {
-  background-color: var(--base);
-  box-shadow: 0 0 1em 0.25em var(--base) , 0 0 4em 2em var(--second) , inset 0 0 0.75em 0.25em var(--base);
-  color: var(--btn);
-}
-
-
-.btn-login:active {
-  box-shadow: 0 0 0.6em 0.25em var(--base) , 0 0 2.5em 2em var(--second) , inset 0 0 0.5em 0.25em var(--base);
 }

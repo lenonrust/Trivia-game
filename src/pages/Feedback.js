@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import { resetPlayer } from '../actions';
 import Header from '../components/Header';
+import '../Styles/feedback.css';
 
 class Feedback extends Component {
   componentDidMount() {
@@ -44,27 +45,41 @@ class Feedback extends Component {
     return (
       <>
         <Header />
-        <main>
+        <main className="feedback-container">
           <h1>Feedback</h1>
           <h2 data-testid="feedback-text">{this.feedbackMessage()}</h2>
           <p>O seu placar total foi de:</p>
-          <p data-testid="feedback-total-score">{score}</p>
+          <p
+            className="feedback-count"
+            data-testid="feedback-total-score"
+          >
+            {score}
+          </p>
           <p>Número de questões corretas:</p>
-          <p data-testid="feedback-total-question">{assertions}</p>
-          <button
-            type="button"
-            data-testid="btn-play-again"
-            onClick={ this.playAgainBtn }
+          <p
+            className="feedback-count"
+            data-testid="feedback-total-question"
           >
-            Play Again
-          </button>
-          <button
-            type="button"
-            data-testid="btn-ranking"
-            onClick={ this.goToRanking }
-          >
-            Ranking
-          </button>
+            {assertions}
+          </p>
+          <div>
+            <button
+              className="feedback-btn"
+              type="button"
+              data-testid="btn-play-again"
+              onClick={ this.playAgainBtn }
+            >
+              <span>Play Again</span>
+            </button>
+            <button
+              className="feedback-btn"
+              type="button"
+              data-testid="btn-ranking"
+              onClick={ this.goToRanking }
+            >
+              <span>Ranking</span>
+            </button>
+          </div>
         </main>
       </>
     );
