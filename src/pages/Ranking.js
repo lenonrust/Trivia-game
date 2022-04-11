@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { GiCrownedSkull } from 'react-icons/gi';
 import { resetPlayer } from '../actions';
 import '../Styles/ranking.css';
 
@@ -30,7 +31,10 @@ class Ranking extends Component {
       <div>
         <div className="ranking-head">
           <p data-testid="ranking-title">Ranking</p>
-          <span role="img" aria-labelledby="trophy">🏆</span>
+          <span role="img" aria-labelledby="trophy">
+            <GiCrownedSkull />
+          </span>
+
         </div>
         <div className="ranking-container">
           {rankingList.map((element, index) => (
