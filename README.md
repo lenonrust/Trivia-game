@@ -1,6 +1,6 @@
 ## 💻 Trivia Game Quiz
 
-<h3>  Desenvolvido um jogo de perguntas e respostas baseado no jogo Trivia,  utilizando React e Redux, nesta aplicação é possível: </h3>
+<h3>  Desenvolvido um jogo de perguntas e respostas baseado no jogo Trivia,  utilizando React e Redux. Nesta aplicação é possível: </h3>
     <p>Logar no jogo e, se o email tiver cadastro no site Gravatar, ter sua foto associada ao perfil da pessoa usuária.</p>
      <p>Acessar a página referente ao jogo, onde se deverá escolher uma das respostas disponíveis para cada uma das perguntas apresentadas. A resposta deve ser marcada antes do contador de tempo chegar a zero, caso contrário a resposta deverá ser considerada errada.</p>
     <p>  Ser redirecionada, após 5 perguntas respondidas, para a tela de score, onde é calculado o número de acertos.</p>
